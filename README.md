@@ -8,9 +8,9 @@
 | Resource | Link |
 |----------|------|
 | 📓 **Colab Notebook** | [Open in Colab](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing) |
-| 📄 **Report** | [View PDF](../../blob/Assignment-1/report/B23CS1078_Vishal_Kishore_Ass1.pdf) |
-| 💾 **Best Model** | [Download](../../blob/Assignment-1/models/best_model.pth) |
-| 📊 **Results CSV** | [View](../../blob/Assignment-1/results/results_summary.csv) |
+| 📄 **Report** | [View PDF](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/report/B23CS1078_Vishal_Kishore_Ass1.pdf) |
+| 💾 **Best Model** | [Download](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/models/best_model.pth) |
+| 📊 **Results CSV** | [View](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/results/results_summary.csv) |
 
 ---
 
