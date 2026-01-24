@@ -1,9 +1,16 @@
-# MLOps-Vishal_Kishore-B23CS1078
+# Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
 
-## Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
+[![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://vishalkishore.github.io/MLOps-Vishal_Kishore-B23CS1078/)
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://your-github-username.github.io/MLOps-Name-rollNumber/)
-[![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](YOUR_COLAB_LINK_HERE)
+## 🔗 Quick Links
+
+| Resource | Link |
+|----------|------|
+| 📓 **Colab Notebook** | [Open in Colab](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing) |
+| 📄 **Report** | [View PDF](../../blob/Assignment-1/report/B23CS1078_Vishal_Kishore_Ass1.pdf) |
+| 💾 **Best Model** | [Download](../../blob/Assignment-1/models/best_model.pth) |
+| 📊 **Results CSV** | [View](../../blob/Assignment-1/results/results_summary.csv) |
 
 ---
 
@@ -78,39 +85,49 @@
 
 ## 📊 Q1(b): SVM Classifier Results
 
-### RBF Kernel Performance
+### MNIST - RBF Kernel
 
-| Dataset | Kernel | C | Gamma | Accuracy (%) | Time (ms) |
-|:-------:|:------:|:-:|:-----:|:------------:|:---------:|
-| FashionMNIST | RBF | 1 | scale | 90.28 | 7968.30 |
-| FashionMNIST | RBF | 5 | scale | 96.40 | 7455.83 |
-| FashionMNIST | RBF | 10 | scale | 98.48 | 7297.64 |
-| FashionMNIST | RBF | 1 | 0.01 | **100.00** | 54765.56 |
-| FashionMNIST | RBF | 5 | 0.01 | **100.00** | 56357.26 |
-| FashionMNIST | RBF | 10 | 0.01 | **100.00** | 55920.97 |
-| MNIST | RBF | 1 | scale | 98.51 | 7842.62 |
-| MNIST | RBF | 5 | scale | 99.94 | 7654.89 |
-| MNIST | RBF | 10 | scale | **100.00** | 7662.79 |
-| MNIST | RBF | 1 | 0.01 | **100.00** | 54820.70 |
-| MNIST | RBF | 5 | 0.01 | **100.00** | 56552.06 |
-| MNIST | RBF | 10 | 0.01 | **100.00** | 57078.93 |
+| C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
+|:-:|:-----:|:------:|:------------:|:------------------:|
+| 1 | scale | 3 | 94.45 | 7993.38 |
+| 5 | scale | 3 | **95.40** | 7411.84 |
+| 10 | scale | 3 | **95.55** | 8001.53 |
+| 1 | 0.01 | 3 | 93.25 | 7175.44 |
+| 5 | 0.01 | 3 | 95.10 | 9403.81 |
+| 10 | 0.01 | 3 | **95.45** | 6162.32 |
 
-### Polynomial Kernel Performance
+### MNIST - Polynomial Kernel
 
-| Dataset | Kernel | C | Gamma | Degree | Accuracy (%) | Time (ms) |
-|:-------:|:------:|:-:|:-----:|:------:|:------------:|:---------:|
-| FashionMNIST | Poly | 1 | scale | 2 | 89.19 | 7514.64 |
-| FashionMNIST | Poly | 5 | scale | 2 | 94.78 | 6471.47 |
-| FashionMNIST | Poly | 10 | scale | 2 | 96.84 | 6269.84 |
-| FashionMNIST | Poly | 1 | scale | 3 | 89.85 | 8626.43 |
-| FashionMNIST | Poly | 5 | scale | 3 | 96.26 | 7167.59 |
-| FashionMNIST | Poly | 10 | scale | 3 | 97.80 | 6885.43 |
-| MNIST | Poly | 1 | scale | 2 | 98.44 | 6845.70 |
-| MNIST | Poly | 5 | scale | 2 | 99.88 | 6335.41 |
-| MNIST | Poly | 10 | scale | 2 | 99.96 | 5760.86 |
-| MNIST | Poly | 1 | scale | 3 | 98.84 | 8232.55 |
-| MNIST | Poly | 5 | scale | 3 | 99.87 | 6130.95 |
-| MNIST | Poly | 10 | scale | 3 | 99.96 | 5849.75 |
+| C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
+|:-:|:-----:|:------:|:------------:|:------------------:|
+| 1 | scale | 2 | 94.15 | 6056.24 |
+| 5 | scale | 2 | 95.05 | 5633.33 |
+| 10 | scale | 2 | **95.20** | 5204.85 |
+| 1 | scale | 3 | 93.40 | 8414.45 |
+| 5 | scale | 3 | 94.00 | 6237.90 |
+| 10 | scale | 3 | 94.10 | 5884.44 |
+
+### FashionMNIST - RBF Kernel
+
+| C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
+|:-:|:-----:|:------:|:------------:|:------------------:|
+| 1 | scale | 3 | 86.00 | 10334.46 |
+| 5 | scale | 3 | **87.45** | 6820.15 |
+| 10 | scale | 3 | 87.35 | 6757.70 |
+| 1 | 0.01 | 3 | 86.00 | 7202.21 |
+| 5 | 0.01 | 3 | **87.45** | 6617.26 |
+| 10 | 0.01 | 3 | 87.35 | 6687.58 |
+
+### FashionMNIST - Polynomial Kernel
+
+| C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
+|:-:|:-----:|:------:|:------------:|:------------------:|
+| 1 | scale | 2 | 84.75 | 6769.21 |
+| 5 | scale | 2 | 86.60 | 5886.71 |
+| 10 | scale | 2 | **86.80** | 6729.06 |
+| 1 | scale | 3 | 82.80 | 8146.13 |
+| 5 | scale | 3 | 85.35 | 6939.22 |
+| 10 | scale | 3 | 85.75 | 6051.58 |
 
 ---
 
@@ -143,15 +160,6 @@
 
 ---
 
-## 🔗 Links
-
-- **📓 Colab Notebook**: [Open in Colab](YOUR_COLAB_LINK_HERE)
-- **📄 Report**: [View Report](./report/B23CS1078_Vishal_Kishore_Ass1.pdf)
-- **🌐 GitHub Pages**: [View Website](https://your-github-username.github.io/MLOps-Name-rollNumber/)
-
----
-
 ## 👤 Author
 
-**Vishal Kishore**  
-Roll Number: B23CS1078
+**Vishal Kishore** | Roll Number: B23CS1078
