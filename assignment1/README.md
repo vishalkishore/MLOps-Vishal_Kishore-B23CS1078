@@ -1,6 +1,8 @@
 # Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
 
 [![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://vishalkishore.github.io/MLOps-Vishal_Kishore-B23CS1078/)
+
 
 ## 🔗 Quick Links
 
