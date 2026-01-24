@@ -1,7 +1,6 @@
 # Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
 
 [![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://vishalkishore.github.io/MLOps-Vishal_Kishore-B23CS1078/)
 
 ## 🔗 Quick Links
 
@@ -135,10 +134,10 @@
 
 ### FashionMNIST Dataset - CPU vs GPU Analysis
 
-| Compute | Batch Size | Optimizer | LR | ResNet-18 Acc | ResNet-34 Acc | ResNet-50 Acc | R-18 Time (ms) | R-34 Time (ms) | R-50 Time (ms) |
-|:-------:|:----------:|:---------:|:----:|:-------------:|:-------------:|:-------------:|:--------------:|:--------------:|:--------------:|
-| CPU | 16 | SGD | 0.001 | - | - | - | 7,274,210 | - | - |
-| CPU | 16 | Adam | 0.001 | - | - | - | 7,679,214 | - | - |
+| Compute | Batch Size | Optimizer | LR | R-18 Acc | R-34 Acc | R-50 Acc | R-18 Time (ms) | R-34 Time (ms) | R-50 Time (ms) |
+|:-------:|:----------:|:---------:|:----:|:--------:|:--------:|:--------:|:--------------:|:--------------:|:--------------:|
+| CPU | 16 | SGD | 0.001 | 91.74 ± 0.06% | 91.65 ± 0.38% | 90.39 ± 0.50% | 7,274,210 | 1,879,214 | 2,619,201 |
+| CPU | 16 | Adam | 0.001 | 92.01 ± 0.06% | 92.08 ± 0.25% | 91.90 ± 0.10% | 7,679,113 | 1,867,889 | 2,699,217 |
 | GPU | 16 | SGD | 0.001 | 91.73 ± 0.06% | 91.65 ± 0.38% | 90.40 ± 0.50% | 545,392 | 923,336 | 1,663,622 |
 | GPU | 16 | Adam | 0.001 | **92.04 ± 0.07%** | **92.08 ± 0.25%** | 91.90 ± 0.11% | 533,329 | 1,025,271 | 1,663,071 |
 
