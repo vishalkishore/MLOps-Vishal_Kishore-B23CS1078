@@ -2,6 +2,9 @@
 
 This project trains a ResNet-18 model on the CIFAR-10 dataset using PyTorch. It monitors training progress, logs metrics to WandB, and visualizes gradient flow and weight updates.
 
+### Report
+![Report](report/Vishal_Kishore_B23CS1078_lab2_worksheet.png)
+
 ## Model Statistics
 - **Architecture**: ResNet-18 (customized for CIFAR-10)
 - **Parameters**: 11.174M
