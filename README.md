@@ -3,23 +3,25 @@
 This repository contains machine learning assignments and projects for MLOps (B23CS1078).
 
 ---
-
 # Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
 
 [![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://vishalkishore.github.io/MLOps-Vishal_Kishore-B23CS1078/)
 
+
 ## 🔗 Quick Links
+
 | Resource | Link |
 |----------|------|
 | 📓 **Colab Notebook** | [Open in Colab](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing) |
-| 📄 **Report** | [View PDF](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/report/B23CS1078_Vishal_Kishore_Ass1.pdf) |
-| 💾 **Best Model** | [Download](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/models/best_model.pth) |
-| 📊 **Results CSV** | [View](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/Assignment-1/results/results_summary.csv) |
+| 📄 **Report** | [View PDF](../../blob/Assignment-1/report/B23CS1078_Vishal_Kishore_Ass1.pdf) |
+| 💾 **Best Model** | [Download](../../blob/Assignment-1/models/best_model.pth) |
+| 📊 **Results CSV** | [View](../../blob/Assignment-1/results/results_summary.csv) |
 
 ---
 
 ## 📋 Experiment Configuration
+
 | Parameter | Value |
 |-----------|-------|
 | **Datasets** | MNIST, FashionMNIST |
@@ -34,6 +36,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 ## 📊 Q1(a): Classification Results
 
 ### MNIST Dataset - 20 Epochs
+
 | Batch Size | Optimizer | LR | ResNet-18 (No Sched.) | ResNet-18 (Cosine) | ResNet-50 (Cosine) |
 |:----------:|:---------:|:----:|:---------------------:|:------------------:|:------------------:|
 | 16 | SGD | 0.001 | 99.20 ± 0.10% | 99.32 ± 0.04% | 99.07 ± 0.07% |
@@ -46,6 +49,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 32 | Adam | 0.0001 | 99.12 ± 0.14% | 99.22 ± 0.19% | 98.96 ± 0.10% |
 
 ### MNIST Dataset - 10 Epochs
+
 | Batch Size | Optimizer | LR | ResNet-18 (No Sched.) | ResNet-18 (Cosine) | ResNet-50 (No Sched.) | ResNet-50 (Cosine) |
 |:----------:|:---------:|:----:|:---------------------:|:------------------:|:---------------------:|:------------------:|
 | 16 | SGD | 0.001 | 99.14 ± 0.05% | 99.20 ± 0.06% | 98.81 ± 0.10% | 98.99 ± 0.05% |
@@ -58,6 +62,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 32 | Adam | 0.0001 | 99.01 ± 0.09% | 99.25 ± 0.19% | 98.27 ± 0.12% | 98.64 ± 0.05% |
 
 ### FashionMNIST Dataset - 20 Epochs
+
 | Batch Size | Optimizer | LR | ResNet-18 (Cosine) | ResNet-50 (Cosine) |
 |:----------:|:---------:|:----:|:------------------:|:------------------:|
 | 16 | SGD | 0.001 | 91.73 ± 0.06% | 90.40 ± 0.50% |
@@ -70,6 +75,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 32 | Adam | 0.0001 | 91.18 ± 0.21% | 89.87 ± 0.19% |
 
 ### FashionMNIST Dataset - 10 Epochs
+
 | Batch Size | Optimizer | LR | ResNet-18 (No Sched.) | ResNet-18 (Cosine) | ResNet-50 (No Sched.) | ResNet-50 (Cosine) |
 |:----------:|:---------:|:----:|:---------------------:|:------------------:|:---------------------:|:------------------:|
 | 16 | SGD | 0.001 | 90.89 ± 0.29% | 91.61 ± 0.14% | 89.50 ± 0.31% | 90.04 ± 0.64% |
@@ -81,9 +87,12 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 32 | Adam | 0.001 | 91.03 ± 0.13% | **92.22 ± 0.19%** | 88.81 ± 0.46% | 91.47 ± 0.37% |
 | 32 | Adam | 0.0001 | 90.19 ± 0.20% | 90.67 ± 0.40% | 87.32 ± 0.37% | 88.65 ± 0.46% |
 
+---
+
 ## 📊 Q1(b): SVM Classifier Results
 
 ### MNIST - RBF Kernel
+
 | C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
 |:-:|:-----:|:------:|:------------:|:------------------:|
 | 1 | scale | 3 | 94.45 | 7993.38 |
@@ -94,6 +103,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 10 | 0.01 | 3 | **95.45** | 6162.32 |
 
 ### MNIST - Polynomial Kernel
+
 | C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
 |:-:|:-----:|:------:|:------------:|:------------------:|
 | 1 | scale | 2 | 94.15 | 6056.24 |
@@ -104,6 +114,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 10 | scale | 3 | 94.10 | 5884.44 |
 
 ### FashionMNIST - RBF Kernel
+
 | C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
 |:-:|:-----:|:------:|:------------:|:------------------:|
 | 1 | scale | 3 | 86.00 | 10334.46 |
@@ -114,6 +125,7 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 10 | 0.01 | 3 | 87.35 | 6687.58 |
 
 ### FashionMNIST - Polynomial Kernel
+
 | C | Gamma | Degree | Accuracy (%) | Training Time (ms) |
 |:-:|:-----:|:------:|:------------:|:------------------:|
 | 1 | scale | 2 | 84.75 | 6769.21 |
@@ -123,8 +135,12 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | 5 | scale | 3 | 85.35 | 6939.22 |
 | 10 | scale | 3 | 85.75 | 6051.58 |
 
+---
+
 ## 📊 Q2: CPU vs GPU Performance Comparison
+
 ### FashionMNIST Dataset - CPU vs GPU Analysis
+
 | Compute | Batch Size | Optimizer | LR | R-18 Acc | R-34 Acc | R-50 Acc | R-18 Time (ms) | R-34 Time (ms) | R-50 Time (ms) |
 |:-------:|:----------:|:---------:|:----:|:--------:|:--------:|:--------:|:--------------:|:--------------:|:--------------:|
 | CPU | 16 | SGD | 0.001 | 91.74 ± 0.06% | 91.65 ± 0.38% | 90.39 ± 0.50% | 7,274,210 | 1,879,214 | 2,619,201 |
@@ -133,18 +149,21 @@ This repository contains machine learning assignments and projects for MLOps (B2
 | GPU | 16 | Adam | 0.001 | **92.04 ± 0.07%** | **92.08 ± 0.25%** | 91.90 ± 0.11% | 533,329 | 1,025,271 | 1,663,071 |
 
 ### FLOPs Analysis
+
 | Compute Device | Batch Size | ResNet-18 FLOPs | ResNet-34 FLOPs | ResNet-50 FLOPs |
 |:--------------:|:----------:|:---------------:|:---------------:|:---------------:|
 | CPU | 16 | 0.03G | 0.07G | 0.08G |
 | GPU | 16 | 0.03G | 0.07G | 0.08G |
 
+---
+
 ## 🏆 Best Model Summary
+
 | Dataset | Best Model | Configuration | Test Accuracy |
 |:-------:|:----------:|:-------------:|:-------------:|
 | MNIST | ResNet-18 | Adam, LR=0.001, Batch=32, Cosine, 20 Epochs | **99.45 ± 0.07%** |
 | FashionMNIST | ResNet-18 | Adam, LR=0.001, Batch=16, Cosine, 10 Epochs | **92.28 ± 0.09%** |
 
----
 ---
 
 # Assignment 2: ResNet-18 on CIFAR-10
