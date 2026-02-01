@@ -40,4 +40,4 @@ This project trains a ResNet-18 model on the CIFAR-10 dataset using PyTorch. It 
 ## Experiment Tracking
 Training runs and metrics are tracked using **Weights & Biases**.
 - **Project**: `cifar10-cnn-training`
-- [View WandB Dashboard](https://wandb.ai)
+- [View WandB Dashboard](https://wandb.ai/kishorevishal/cifar10-cnn-training)
