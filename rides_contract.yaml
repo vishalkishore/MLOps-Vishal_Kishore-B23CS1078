@@ -1,0 +1,165 @@
+# Source: https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/data_contract
+# ============================================================================
+# CITYMOVE RIDE DATA - CONTRACT SPECIFICATION
+# ============================================================================
+# 
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │ STAKEHOLDER AGREEMENT                                                    │
+# ├─────────────────────────────────────────────────────────────────────────┤
+# │ Data Provider : Platform Engineering (platform-eng@citymove.in)         │
+# │ Data Consumer : ML Pricing Engine Team (pricing-ml@citymove.in)         │
+# │                                                                          │
+# │ What was discussed:                                                      │
+# │   • ML team requires data within 30 mins for hourly retraining cycles   │
+# │   • All DB column names need human-readable alternatives                 │
+# │   • Negative fare values crashed the model last week - must block them  │
+# │   • Passenger identifier enables user tracking - mark as sensitive      │
+# │                                                                          │
+# │ Decisions taken:                                                         │
+# │   • Schema renamed: cost_total → fare_final caused 4hr outage           │
+# │   • This contract shields consumers from future physical changes        │
+# │   • Strict validation on fare/rating/distance to protect model          │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+dataContractSpecification: 0.1.4
+id: urn:datacontract:citymove:rides-dataset
+version: 1.0.0
+
+# ============================================================================
+# SECTION 1: METADATA & GOVERNANCE
+# ============================================================================
+info:
+  title: "CityMove Ride Transactions"
+  description: |
+    Captures completed ride details from the CityMove platform.
+    Feeds into dynamic surge pricing ML pipeline.
+    Caution: Contains passenger identifiers requiring privacy handling.
+  owner: "Platform Engineering"
+  contact:
+    name: "Ride Data Owner"
+    email: "ride-data-owner@citymove.in"
+    slack: "#citymove-data-help"
+  classification: confidential
+  tags: [mobility, pricing-input, ml-feed, contains-pii]
+
+# ============================================================================
+# SECTION 2: LOGICAL FIELD DEFINITIONS
+# ============================================================================
+schema:
+  type: object
+  properties:
+
+    ride_id:
+      type: string
+      description: "Primary key for each ride (format: alphanumeric with dashes)"
+      pii: false
+      # maps to: r_id
+
+    pickup_timestamp:
+      type: string
+      format: datetime
+      description: "When passenger was picked up (UTC timezone)"
+      pii: false
+      # maps to: ts_start
+
+    passenger_id:
+      type: integer
+      description: |
+        Passenger account number.
+        PRIVACY NOTE: Enables user identification - handle per data policy.
+      pii: true
+      # maps to: pax_id
+
+    driver_rating:
+      type: number
+      minimum: 1.0
+      maximum: 5.0
+      description: "Star rating given by passenger (1=poor, 5=excellent)"
+      pii: false
+      # maps to: d_rating
+
+    fare_inr:
+      type: number
+      minimum: 0
+      description: |
+        Final ride cost in Indian Rupees.
+        Zero or positive values only - negatives indicate corruption.
+      pii: false
+      # maps to: fare_final (previously cost_total)
+
+    distance_meters:
+      type: integer
+      description: "Trip distance measured in meters. Required field."
+      pii: false
+      # maps to: dist_m
+
+  required:
+    - ride_id
+    - pickup_timestamp
+    - passenger_id
+    - driver_rating
+    - fare_inr
+    - distance_meters
+
+# ============================================================================
+# SECTION 3: DELIVERY GUARANTEES
+# ============================================================================
+sla:
+  freshness:
+    threshold: "30 minutes"
+    description: "Available for ML consumption within half hour of ride end"
+  availability:
+    percentage: "99.9%"
+    description: "Near-continuous uptime for pricing pipeline"
+  retention:
+    period: "2 years"
+    description: "Kept for historical trend modeling"
+
+# ============================================================================
+# SECTION 4: VALIDATION CHECKS
+# ============================================================================
+quality:
+
+  - name: check_fare_positive
+    type: validity
+    expression: "fare_inr >= 0"
+    threshold: "100%"
+    enforcement: hard
+    description: |
+      Blocks records with negative fare amounts.
+      A fare of -5 would corrupt ML predictions - pipeline stops on violation.
+
+  - name: check_rating_bounds
+    type: validity
+    expression: "driver_rating >= 1.0 AND driver_rating <= 5.0"
+    threshold: "100%"
+    enforcement: hard
+    description: "Rating outside 1-5 range is invalid input"
+
+  - name: check_distance_present
+    type: completeness
+    column: distance_meters
+    threshold: "100%"
+    enforcement: hard
+    description: "Every record must have distance - null not permitted"
+
+  - name: check_ride_uniqueness
+    type: uniqueness
+    column: ride_id
+    threshold: "100%"
+    enforcement: hard
+    description: "Duplicate ride IDs indicate data pipeline issues"
+
+# ============================================================================
+# SECTION 5: DATA FLOW
+# ============================================================================
+lineage:
+  sources:
+    - name: rides_postgres
+      type: postgresql
+      table: raw_rides_log_v2
+      description: "Operational DB storing ride events"
+  consumers:
+    - name: surge-pricing-model
+      team: pricing-ml
+      usage: "Retrains hourly to predict demand-based pricing"

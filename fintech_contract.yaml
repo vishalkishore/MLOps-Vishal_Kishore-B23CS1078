@@ -1,0 +1,142 @@
+# Source: https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/data_contract
+# ============================================================================
+# BANKING TRANSACTION LOG - CONTRACT SPECIFICATION
+# ============================================================================
+#
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │ CRITICAL SYSTEM                                                          │
+# ├─────────────────────────────────────────────────────────────────────────┤
+# │ Consumer: Real-time Fraud Detection Engine                              │
+# │                                                                          │
+# │ Discovered issue:                                                        │
+# │   Legacy migration left some source account IDs at 8 chars instead of  │
+# │   the mandated 10. Fraud model lookup silently fails on short IDs,     │
+# │   potentially missing suspicious transactions.                          │
+# │                                                                          │
+# │ ⚠️  HARD CIRCUIT BREAKER ACTIVE                                          │
+# │   Any account ID not matching ^[A-Z0-9]{10}$ halts the entire pipeline │
+# │   No exceptions - fraud detection cannot afford silent failures        │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+dataContractSpecification: 0.1.4
+id: urn:datacontract:banking:tx-feed
+version: 1.0.0
+
+# ============================================================================
+# SECTION 1: GOVERNANCE
+# ============================================================================
+info:
+  title: "Transaction Feed for Fraud Detection"
+  description: |
+    Real-time transaction stream analyzed for suspicious patterns.
+    Account ID format strictly enforced to ensure lookup success.
+    Any format violation stops processing - no silent failures allowed.
+  owner: "Core Banking Systems"
+  contact:
+    name: "Transaction Data Lead"
+    email: "tx-data@bank.in"
+    slack: "#fraud-data-issues"
+  classification: restricted
+  tags: [banking, fraud-prevention, real-time, high-stakes]
+
+# ============================================================================
+# SECTION 2: FIELD DEFINITIONS
+# ============================================================================
+schema:
+  type: object
+  properties:
+
+    account_source_id:
+      type: string
+      pattern: "^[A-Z0-9]{10}$"
+      description: |
+        Originating account identifier.
+        STRICT FORMAT: 10 characters, uppercase letters and digits only.
+        Examples that pass: ABCD123456, 1234567890, A1B2C3D4E5
+        Examples that fail: abcd1234 (lowercase+short), ABC_12345 (underscore)
+      pii: false
+      # from: acct_src
+
+    account_destination_id:
+      type: string
+      pattern: "^[A-Z0-9]{10}$"
+      description: |
+        Receiving account identifier.
+        Same format rules as source account.
+      pii: false
+      # from: acct_dest
+
+    transaction_timestamp:
+      type: string
+      format: datetime
+      description: "Exact moment of transaction for temporal analysis"
+      pii: false
+      # from: tx_ts
+
+  required:
+    - account_source_id
+    - account_destination_id
+    - transaction_timestamp
+
+# ============================================================================
+# SECTION 3: UPTIME COMMITMENTS
+# ============================================================================
+sla:
+  freshness:
+    threshold: "30 seconds"
+    description: "Near real-time for immediate fraud flagging"
+  availability:
+    percentage: "99.99%"
+    description: "Fraud detection cannot have downtime"
+  retention:
+    period: "7 years"
+    description: "Regulatory compliance requirement"
+
+# ============================================================================
+# SECTION 4: ENFORCEMENT RULES
+# ============================================================================
+quality:
+
+  # ⚠️ HARD CIRCUIT BREAKER - Pipeline stops on violation
+  - name: source_account_format_check
+    type: validity
+    expression: "REGEXP_LIKE(account_source_id, '^[A-Z0-9]{10}$')"
+    threshold: "100%"
+    enforcement: hard  # <-- BLOCKS PIPELINE
+    description: |
+      ⚠️ HARD CIRCUIT BREAKER
+      Source account must be exactly 10 uppercase alphanumerics.
+      Short IDs from legacy migration cause fraud model lookup failures.
+      Pipeline halts on any violation to prevent missed fraud detection.
+
+  # ⚠️ HARD CIRCUIT BREAKER - Pipeline stops on violation
+  - name: dest_account_format_check
+    type: validity
+    expression: "REGEXP_LIKE(account_destination_id, '^[A-Z0-9]{10}$')"
+    threshold: "100%"
+    enforcement: hard  # <-- BLOCKS PIPELINE
+    description: |
+      ⚠️ HARD CIRCUIT BREAKER
+      Destination account follows same strict format.
+      Invalid format = pipeline blocked.
+
+  - name: timestamp_required
+    type: completeness
+    column: transaction_timestamp
+    threshold: "100%"
+    enforcement: hard
+    description: "Transaction timing essential for pattern detection"
+
+# ============================================================================
+# SECTION 5: DATA FLOW
+# ============================================================================
+lineage:
+  sources:
+    - name: core_tx_system
+      type: database
+      table: tx_log
+      description: "Central banking transaction ledger (includes legacy data)"
+  consumers:
+    - name: fraud-scanner
+      team: fraud-prevention
+      usage: "Scans every transaction for anomalies in real-time"

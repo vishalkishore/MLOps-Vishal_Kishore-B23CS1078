@@ -1,0 +1,131 @@
+# Source: https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/data_contract
+# ============================================================================
+# FLASH SALE ORDERS - CONTRACT SPECIFICATION
+# ============================================================================
+#
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │ CONTEXT                                                                  │
+# ├─────────────────────────────────────────────────────────────────────────┤
+# │ Provider: Order Processing System                                       │
+# │ Consumer: Marketing Analytics Dashboard                                 │
+# │                                                                          │
+# │ Issues from last Black Friday:                                          │
+# │   • Bug produced negative order amounts - dashboard showed wrong totals │
+# │   • Unknown status code (7) crashed the UI - only knew PAID/CANCELLED  │
+# │                                                                          │
+# │ This contract ensures:                                                   │
+# │   • Order amounts are always zero or positive                           │
+# │   • Status codes mapped to readable names                               │
+# │   • Unmapped codes rejected before reaching dashboard                   │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+dataContractSpecification: 0.1.4
+id: urn:datacontract:ecommerce:sale-orders
+version: 1.0.0
+
+# ============================================================================
+# SECTION 1: METADATA
+# ============================================================================
+info:
+  title: "Flash Sale Order Feed"
+  description: |
+    Live order stream during promotional events.
+    Powers real-time ad budget adjustments.
+    Status values transformed from integer codes to business terms.
+  owner: "Order Systems Team"
+  contact:
+    name: "Order Data Lead"
+    email: "orders-data@shop.in"
+    slack: "#orders-data-channel"
+  classification: internal
+  tags: [sales, real-time, marketing-input, promotions]
+
+# ============================================================================
+# SECTION 2: FIELD SPECIFICATIONS
+# ============================================================================
+schema:
+  type: object
+  properties:
+
+    order_total_inr:
+      type: number
+      minimum: 0
+      description: |
+        Order value in Indian Rupees.
+        Negative amounts are data errors - rejected at ingestion.
+      pii: false
+      # source column: o_total
+
+    status:
+      type: string
+      enum: [PAID, SHIPPED, CANCELLED]
+      description: |
+        Human-readable order state.
+        Transformation from source:
+          code 2 becomes PAID
+          code 5 becomes SHIPPED
+          code 9 becomes CANCELLED
+        Other codes are blocked.
+      pii: false
+      # source column: status_code
+
+  required:
+    - order_total_inr
+    - status
+
+# ============================================================================
+# SECTION 3: AVAILABILITY TERMS
+# ============================================================================
+sla:
+  freshness:
+    threshold: "1 minute"
+    description: "Sub-minute latency for live dashboards"
+  availability:
+    percentage: "99.9%"
+    description: "Must stay up during peak sale hours"
+  retention:
+    period: "1 year"
+    description: "Year-over-year comparison analytics"
+
+# ============================================================================
+# SECTION 4: DATA CHECKS
+# ============================================================================
+quality:
+
+  - name: validate_order_amount
+    type: validity
+    expression: "order_total_inr >= 0"
+    threshold: "100%"
+    enforcement: hard
+    description: "Negative order values break totals - block them"
+
+  - name: validate_status_value
+    type: validity
+    expression: "status IN ('PAID', 'SHIPPED', 'CANCELLED')"
+    threshold: "100%"
+    enforcement: hard
+    description: "Only transformed status values pass through"
+
+  - name: reject_unknown_codes
+    type: validity
+    expression: "status_code IN (2, 5, 9)"
+    threshold: "100%"
+    enforcement: hard
+    description: |
+      Raw status codes outside {2, 5, 9} have no mapping.
+      Code like 7 previously crashed the marketing dashboard.
+      Such records are filtered out before transformation.
+
+# ============================================================================
+# SECTION 5: DATA LINEAGE
+# ============================================================================
+lineage:
+  sources:
+    - name: order_database
+      type: database
+      table: orders_raw
+      description: "Primary order storage"
+  consumers:
+    - name: ad-spend-dashboard
+      team: marketing-analytics
+      usage: "Adjusts campaign budgets based on live conversion data"

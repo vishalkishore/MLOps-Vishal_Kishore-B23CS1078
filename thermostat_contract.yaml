@@ -1,0 +1,139 @@
+# Source: https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/data_contract
+# ============================================================================
+# SMART THERMOSTAT TELEMETRY - CONTRACT SPECIFICATION
+# ============================================================================
+#
+# ┌─────────────────────────────────────────────────────────────────────────┐
+# │ BACKGROUND                                                               │
+# ├─────────────────────────────────────────────────────────────────────────┤
+# │ Fleet: 10,000 connected thermostats transmitting every 60 seconds       │
+# │                                                                          │
+# │ Known sensor failure modes:                                              │
+# │   • Broken sensors report 9999°C - skews average temperature reports    │
+# │   • Malfunctioning battery sensors show 1.5 or -0.2 levels             │
+# │                                                                          │
+# │ Contract filters out garbage readings before they reach analytics.      │
+# └─────────────────────────────────────────────────────────────────────────┘
+
+dataContractSpecification: 0.1.4
+id: urn:datacontract:iot:thermostat-readings
+version: 1.0.0
+
+# ============================================================================
+# SECTION 1: OWNERSHIP
+# ============================================================================
+info:
+  title: "Thermostat Fleet Telemetry"
+  description: |
+    Per-minute readings from smart thermostat network.
+    Used for home temperature aggregation and device health monitoring.
+    Built-in filters catch sensor malfunctions.
+  owner: "IoT Platform Team"
+  contact:
+    name: "Device Data Manager"
+    email: "iot-sensors@devices.in"
+    slack: "#thermostat-alerts"
+  classification: internal
+  tags: [iot, sensors, temperature, device-health]
+
+# ============================================================================
+# SECTION 2: SCHEMA
+# ============================================================================
+schema:
+  type: object
+  properties:
+
+    device_id:
+      type: string
+      description: "Thermostat serial number"
+      pii: false
+      # from: dev_id
+
+    temperature_celsius:
+      type: number
+      minimum: -30
+      maximum: 60
+      description: |
+        Ambient temperature reading.
+        Acceptable: -30 to +60 degrees Celsius.
+        Readings like 9999 mean sensor failure - rejected.
+      pii: false
+      # from: temp_c
+
+    battery_level:
+      type: number
+      minimum: 0.0
+      maximum: 1.0
+      description: |
+        Charge percentage as decimal.
+        0.0 = empty, 1.0 = full (both valid edge cases).
+        Anything outside [0, 1] signals sensor error.
+      pii: false
+      # from: batt_lvl
+
+  required:
+    - device_id
+    - temperature_celsius
+    - battery_level
+
+# ============================================================================
+# SECTION 3: SERVICE TERMS
+# ============================================================================
+sla:
+  freshness:
+    threshold: "2 minutes"
+    description: "Sensor data lands within 2 mins of measurement"
+  availability:
+    percentage: "99.5%"
+    description: "Supports continuous fleet monitoring"
+  retention:
+    period: "1 year"
+    description: "Historical data for seasonal analysis"
+
+# ============================================================================
+# SECTION 4: QUALITY GATES
+# ============================================================================
+quality:
+
+  - name: temp_within_realistic_range
+    type: validity
+    expression: "temperature_celsius >= -30 AND temperature_celsius <= 60"
+    threshold: "100%"
+    enforcement: hard
+    description: |
+      Filters out impossible readings.
+      9999°C or similar garbage values break aggregate reports.
+      Valid home temperatures fall between -30 and 60 Celsius.
+
+  - name: battery_percentage_valid
+    type: validity
+    expression: "battery_level >= 0.0 AND battery_level <= 1.0"
+    threshold: "100%"
+    enforcement: hard
+    description: |
+      Battery shown as 0-1 fraction.
+      Values like -0.2 or 1.5 indicate broken sensors.
+      Dead battery (0.0) and full charge (1.0) are legitimate.
+
+  - name: device_identifier_present
+    type: completeness
+    column: device_id
+    threshold: "100%"
+    enforcement: hard
+    description: "Cannot process anonymous sensor data"
+
+# ============================================================================
+# SECTION 5: SOURCES & CONSUMERS
+# ============================================================================
+lineage:
+  sources:
+    - name: mqtt_telemetry
+      type: mqtt
+      description: "Direct feed from thermostat network"
+  consumers:
+    - name: home-temp-report
+      team: analytics
+      usage: "Computes average home temperature metrics"
+    - name: battery-alert-service
+      team: device-ops
+      usage: "Triggers low battery warnings"
