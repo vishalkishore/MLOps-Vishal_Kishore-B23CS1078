@@ -1,0 +1,11 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY .venv .venv
+ENV PYTHONPATH="/app/.venv/lib/python3.12/site-packages"
+
+COPY set_a/train.py .
+COPY set_a/data/train/ data/train/
+
+CMD ["python", "train.py"]
