@@ -1,0 +1,19 @@
+# Build:  docker build -f Dockerfile.eval -t lab3-eval .
+# Run:    docker run lab3-eval
+
+FROM python:3.12-slim
+
+RUN pip install uv
+
+WORKDIR /app
+
+COPY pyproject.toml uv.lock* ./
+
+RUN uv sync --frozen --no-dev
+
+COPY .env .env
+COPY utils.py data.py eval.py ./
+
+COPY label_maps.json* ./
+
+CMD ["uv", "run", "python", "eval.py"]

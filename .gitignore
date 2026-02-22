@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+*.tex
+
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Model artifacts
+distilbert-reviews-genres/
+results/
+logs/
+eval_results_tmp/
+*.pickle
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
