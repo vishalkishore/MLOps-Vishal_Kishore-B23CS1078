@@ -2,7 +2,7 @@
 
 **Student:** Vishal Kishore (B23CS1078)  
 **Course:** ML/DL Ops  
-**HuggingFace Model:** [vishalkishore01/model](https://huggingface.co/vishalkishore01/model)
+**HuggingFace Model:** [vishalkishore01/lab3](https://huggingface.co/vishalkishore01/lab3)
 
 ---
 
