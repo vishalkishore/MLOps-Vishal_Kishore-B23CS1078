@@ -3,20 +3,13 @@ from __future__ import annotations
 import os
 
 os.environ.setdefault("WANDB_API_KEY", "YOUR_WANDB_API_KEY")
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-os.environ["WANDB_DISABLE_SYSTEM_STATS"] = "true"
-os.environ["WANDB_DISABLE_CODE"] = "true"
-os.environ["WANDB_DISABLE_GIT"] = "true"
-os.environ["WANDB_CONSOLE"] = "off"
-os.environ["HOSTNAME"] = "vishal"
-os.environ["WANDB_HOST"] = "vishal"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import argparse
 import csv
 import json
 import math
 import random
-import socket
 from copy import deepcopy
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -36,8 +29,6 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms
 from tqdm.auto import tqdm
-
-socket.gethostname = lambda: "vishal"
 
 try:
     import wandb

@@ -2,13 +2,7 @@ from __future__ import annotations
 import os
 
 os.environ.setdefault("WANDB_API_KEY", "YOUR_WANDB_API_KEY")
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-os.environ["WANDB_DISABLE_SYSTEM_STATS"] = "true"
-os.environ["WANDB_DISABLE_CODE"] = "true"
-os.environ["WANDB_DISABLE_GIT"] = "true"
-os.environ["WANDB_CONSOLE"] = "off"
-os.environ["HOSTNAME"] = "vishal"
-os.environ["WANDB_HOST"] = "vishal"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import argparse
 import json
