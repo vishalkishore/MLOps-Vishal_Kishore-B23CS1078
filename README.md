@@ -5,6 +5,14 @@
 
 This repository contains the code, experiment outputs, checkpoints, and report assets for Assignment 5.
 
+## Quick Links
+
+- Report PDF: [report/B23CS1078_Vishal_Kishore_Ass5.pdf](report/B23CS1078_Vishal_Kishore_Ass5.pdf)
+- GitHub Branch: [assignment-5](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/assignment-5)
+- Hugging Face Model Repo: [vishalkishore01/assignment-5](https://huggingface.co/vishalkishore01/assignment-5)
+- WandB Q1: [kishorevishal/assignment5](https://wandb.ai/kishorevishal/assignment5)
+- WandB Q2: [kishorevishal/assignment5_q2](https://wandb.ai/kishorevishal/assignment5_q2)
+
 ## Repository Structure
 
 - `ques_1/` - Q1 training pipeline for ViT-S baseline, LoRA grid search, and Optuna search on CIFAR-100
@@ -238,4 +246,3 @@ Each Q1 run directory contains:
 - BIM detector checkpoint: [outputs/q2/detector_bim/best_model.pt](outputs/q2/detector_bim/best_model.pt)
 
 Q2 output folders also include CSV metrics, summaries, training curves, and qualitative visualizations.
-
