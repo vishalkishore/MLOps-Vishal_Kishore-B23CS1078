@@ -1,0 +1,2 @@
+model/q1/*.pt filter=lfs diff=lfs merge=lfs -text
+model/q2/*.pt filter=lfs diff=lfs merge=lfs -text
