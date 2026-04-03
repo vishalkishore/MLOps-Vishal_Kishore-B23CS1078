@@ -3,6 +3,30 @@
 This repository contains machine learning assignments and projects for MLOps (B23CS1078).
 
 ---
+# Assignment 5: Vision Transformer Fine-tuning and Adversarial Robustness
+
+[![Branch](https://img.shields.io/badge/Branch-assignment--5-blue)](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/assignment-5)
+[![Report](https://img.shields.io/badge/Report-PDF-red)](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/assignment-5/report/B23CS1078_Vishal_Kishore_Ass5.pdf)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Model-yellow)](https://huggingface.co/vishalkishore01/assignment-5)
+
+## Quick Links
+
+| Resource | Link |
+|----------|------|
+| Assignment 5 Branch | [Open branch](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/tree/assignment-5) |
+| Report PDF | [View report](https://github.com/vishalkishore/MLOps-Vishal_Kishore-B23CS1078/blob/assignment-5/report/B23CS1078_Vishal_Kishore_Ass5.pdf) |
+| Hugging Face Models | [vishalkishore01/assignment-5](https://huggingface.co/vishalkishore01/assignment-5) |
+| WandB Q1 | [kishorevishal/assignment5](https://wandb.ai/kishorevishal/assignment5) |
+| WandB Q2 | [kishorevishal/assignment5_q2](https://wandb.ai/kishorevishal/assignment5_q2) |
+
+## Highlights
+
+- Q1: ViT-S head-only baseline reached `0.8143` test accuracy on CIFAR-100.
+- Q1: Best LoRA + Optuna run reached `0.9049` test accuracy with under `1%` trainable parameters.
+- Q2: Clean ResNet-18 reached `0.7836` test accuracy on CIFAR-10.
+- Q2: PGD and BIM detectors achieved `0.9985` and `0.9983` test accuracy.
+
+---
 # Assignment 1: Deep Learning Model Training on MNIST and FashionMNIST
 
 [![Colab](https://img.shields.io/badge/Open%20in-Colab-orange)](https://colab.research.google.com/drive/11LnNZgeAUmjPcV2wpFzFp2L1hn3mjEKd?usp=sharing)
