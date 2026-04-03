@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 *.pt
+!model/q1/*.pt
+!model/q2/*.pt
+
 
 data/
 wandb/
