@@ -8,11 +8,12 @@ __pycache__/
 
 data/
 wandb/
-report/
+report/images/
 
 report/*.aux
 report/*.log
 report/*.out
-report/*.pdf
+report/*.tex
+
 
 .DS_Store
