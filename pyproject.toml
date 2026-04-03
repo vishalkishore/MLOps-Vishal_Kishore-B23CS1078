@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "adversarial-robustness-toolbox>=1.20.1",
+    "huggingface-hub>=1.9.0",
     "matplotlib>=3.10.8",
     "optuna>=4.8.0",
     "pandas>=3.0.2",
