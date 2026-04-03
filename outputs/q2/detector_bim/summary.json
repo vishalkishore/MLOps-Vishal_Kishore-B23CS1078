@@ -1,0 +1,8 @@
+{
+  "attack": "bim",
+  "best_val_accuracy": 0.9979,
+  "test_loss": 0.00872,
+  "test_accuracy": 0.9983,
+  "target_accuracy_met": true,
+  "checkpoint_path": "outputs/q2/detector_bim/best_model.pt"
+}

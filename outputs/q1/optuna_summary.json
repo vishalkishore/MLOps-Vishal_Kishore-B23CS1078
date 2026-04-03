@@ -1,0 +1,210 @@
+{
+  "best_value": 0.907,
+  "best_params": {
+    "rank": 8,
+    "alpha": 4,
+    "dropout": 0.2962490251548571
+  },
+  "trials": [
+    {
+      "number": 0,
+      "value": 0.903,
+      "params": {
+        "rank": 4,
+        "alpha": 4,
+        "dropout": 0.06803226053468923
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 1,
+      "value": 0.8954,
+      "params": {
+        "rank": 2,
+        "alpha": 16,
+        "dropout": 0.15387248286776553
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 2,
+      "value": 0.903,
+      "params": {
+        "rank": 8,
+        "alpha": 4,
+        "dropout": 0.2944913109933531
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 3,
+      "value": 0.9052,
+      "params": {
+        "rank": 8,
+        "alpha": 16,
+        "dropout": 0.14008907534268253
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 4,
+      "value": 0.9066,
+      "params": {
+        "rank": 8,
+        "alpha": 8,
+        "dropout": 0.04171625494034701
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 5,
+      "value": 0.905,
+      "params": {
+        "rank": 8,
+        "alpha": 2,
+        "dropout": 0.29902394574066726
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 6,
+      "value": 0.905,
+      "params": {
+        "rank": 4,
+        "alpha": 8,
+        "dropout": 0.22598934360388875
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 7,
+      "value": 0.9042,
+      "params": {
+        "rank": 16,
+        "alpha": 2,
+        "dropout": 0.029904697335953245
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 8,
+      "value": 0.9022,
+      "params": {
+        "rank": 2,
+        "alpha": 16,
+        "dropout": 0.09065616476264178
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 9,
+      "value": 0.907,
+      "params": {
+        "rank": 8,
+        "alpha": 4,
+        "dropout": 0.2962490251548571
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 10,
+      "value": 0.9056,
+      "params": {
+        "rank": 16,
+        "alpha": 4,
+        "dropout": 0.21510817938661703
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 11,
+      "value": 0.9042,
+      "params": {
+        "rank": 8,
+        "alpha": 8,
+        "dropout": 0.006801240097871197
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 12,
+      "value": 0.902,
+      "params": {
+        "rank": 8,
+        "alpha": 8,
+        "dropout": 0.22510823027543056
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 13,
+      "value": 0.9062,
+      "params": {
+        "rank": 8,
+        "alpha": 4,
+        "dropout": 0.13455321132345466
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 14,
+      "value": 0.9038,
+      "params": {
+        "rank": 8,
+        "alpha": 8,
+        "dropout": 0.1810899779755768
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 15,
+      "value": 0.9032,
+      "params": {
+        "rank": 8,
+        "alpha": 4,
+        "dropout": 0.08489358079849357
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 16,
+      "value": 0.901,
+      "params": {
+        "rank": 2,
+        "alpha": 8,
+        "dropout": 0.26232847833410405
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 17,
+      "value": 0.9034,
+      "params": {
+        "rank": 4,
+        "alpha": 2,
+        "dropout": 0.10934600683469325
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 18,
+      "value": 0.9038,
+      "params": {
+        "rank": 16,
+        "alpha": 8,
+        "dropout": 0.04923638016667839
+      },
+      "state": "TrialState.COMPLETE"
+    },
+    {
+      "number": 19,
+      "value": 0.907,
+      "params": {
+        "rank": 8,
+        "alpha": 4,
+        "dropout": 0.1748516628464663
+      },
+      "state": "TrialState.COMPLETE"
+    }
+  ]
+}

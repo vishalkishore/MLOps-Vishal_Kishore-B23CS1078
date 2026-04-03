@@ -1,0 +1,14 @@
+{
+  "run_name": "lora-r16-a2-d0.029904697335953245",
+  "mode": "lora",
+  "rank": 16,
+  "alpha": 2,
+  "dropout": 0.029904697335953245,
+  "best_val_accuracy": 0.9042,
+  "test_loss": 0.31513,
+  "test_accuracy": 0.9005,
+  "trainable_parameters": 333412,
+  "total_parameters": 22037576,
+  "trainable_percent": 1.5129,
+  "checkpoint_path": "outputs/q1/lora-r16-a2-d0.029904697335953245/best_model.pt"
+}

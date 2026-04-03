@@ -1,0 +1,14 @@
+{
+  "run_name": "lora-r2-a8-d0.26232847833410405",
+  "mode": "lora",
+  "rank": 2,
+  "alpha": 8,
+  "dropout": 0.26232847833410405,
+  "best_val_accuracy": 0.901,
+  "test_loss": 0.316644,
+  "test_accuracy": 0.9022,
+  "trainable_parameters": 75364,
+  "total_parameters": 21779528,
+  "trainable_percent": 0.346,
+  "checkpoint_path": "outputs/q1/lora-r2-a8-d0.26232847833410405/best_model.pt"
+}

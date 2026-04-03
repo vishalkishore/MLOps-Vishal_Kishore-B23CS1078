@@ -1,0 +1,14 @@
+{
+  "run_name": "lora-r2-a2-d0.1",
+  "mode": "lora",
+  "rank": 2,
+  "alpha": 2,
+  "dropout": 0.1,
+  "best_val_accuracy": 0.9012,
+  "test_loss": 0.321607,
+  "test_accuracy": 0.8999,
+  "trainable_parameters": 75364,
+  "total_parameters": 21779528,
+  "trainable_percent": 0.346,
+  "checkpoint_path": "outputs/q1/lora-r2-a2-d0.1/best_model.pt"
+}

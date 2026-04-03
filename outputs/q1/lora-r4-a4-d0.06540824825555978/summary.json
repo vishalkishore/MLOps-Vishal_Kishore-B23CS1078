@@ -1,0 +1,14 @@
+{
+  "run_name": "lora-r4-a4-d0.06540824825555978",
+  "mode": "lora",
+  "rank": 4,
+  "alpha": 4,
+  "dropout": 0.06540824825555978,
+  "best_val_accuracy": 0.904,
+  "test_loss": 0.316185,
+  "test_accuracy": 0.9004,
+  "trainable_parameters": 112228,
+  "total_parameters": 21816392,
+  "trainable_percent": 0.5144,
+  "checkpoint_path": "outputs/q1/lora-r4-a4-d0.06540824825555978/best_model.pt"
+}

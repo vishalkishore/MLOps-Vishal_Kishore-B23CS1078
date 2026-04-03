@@ -1,0 +1,10 @@
+run_name,mode,rank,alpha,dropout,best_val_accuracy,test_loss,test_accuracy,trainable_parameters,total_parameters,trainable_percent,checkpoint_path
+lora-r2-a2-d0.1,lora,2,2,0.1,0.9012,0.321607,0.8999,75364,21779528,0.346,outputs/q1/lora-r2-a2-d0.1/best_model.pt
+lora-r2-a4-d0.1,lora,2,4,0.1,0.902,0.316967,0.9017,75364,21779528,0.346,outputs/q1/lora-r2-a4-d0.1/best_model.pt
+lora-r2-a8-d0.1,lora,2,8,0.1,0.902,0.318581,0.902,75364,21779528,0.346,outputs/q1/lora-r2-a8-d0.1/best_model.pt
+lora-r4-a2-d0.1,lora,4,2,0.1,0.901,0.317842,0.8994,112228,21816392,0.5144,outputs/q1/lora-r4-a2-d0.1/best_model.pt
+lora-r4-a4-d0.1,lora,4,4,0.1,0.9042,0.32182,0.8997,112228,21816392,0.5144,outputs/q1/lora-r4-a4-d0.1/best_model.pt
+lora-r4-a8-d0.1,lora,4,8,0.1,0.9058,0.319582,0.9012,112228,21816392,0.5144,outputs/q1/lora-r4-a8-d0.1/best_model.pt
+lora-r8-a2-d0.1,lora,8,2,0.1,0.9016,0.317166,0.9016,185956,21890120,0.8495,outputs/q1/lora-r8-a2-d0.1/best_model.pt
+lora-r8-a4-d0.1,lora,8,4,0.1,0.9042,0.318289,0.9017,185956,21890120,0.8495,outputs/q1/lora-r8-a4-d0.1/best_model.pt
+lora-r8-a8-d0.1,lora,8,8,0.1,0.9054,0.31632,0.9012,185956,21890120,0.8495,outputs/q1/lora-r8-a8-d0.1/best_model.pt

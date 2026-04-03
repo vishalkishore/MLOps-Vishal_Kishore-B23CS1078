@@ -1,0 +1,14 @@
+{
+  "run_name": "baseline-head-only",
+  "mode": "baseline",
+  "rank": null,
+  "alpha": null,
+  "dropout": 0.1,
+  "best_val_accuracy": 0.819,
+  "test_loss": 0.621492,
+  "test_accuracy": 0.8143,
+  "trainable_parameters": 38500,
+  "total_parameters": 21704164,
+  "trainable_percent": 0.1774,
+  "checkpoint_path": "outputs/q1/baseline-head-only/best_model.pt"
+}

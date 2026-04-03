@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.pt
+
+data/
+wandb/
+report/
+
+report/*.aux
+report/*.log
+report/*.out
+report/*.pdf
+
+.DS_Store

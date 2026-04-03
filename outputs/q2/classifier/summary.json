@@ -1,0 +1,9 @@
+{
+  "best_val_accuracy": 0.7878,
+  "test_loss": 0.630507,
+  "test_accuracy": 0.7836,
+  "target_accuracy_met": true,
+  "checkpoint_path": "outputs/q2/classifier/best_model.pt",
+  "num_test_samples": 10000,
+  "num_correct": 7836
+}

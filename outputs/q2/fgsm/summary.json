@@ -1,0 +1,39 @@
+{
+  "clean_accuracy": 0.7838,
+  "results": [
+    {
+      "eps": 0.01,
+      "clean_accuracy": 0.7838,
+      "scratch_fgsm_accuracy": 0.2341,
+      "art_fgsm_accuracy": 0.3504,
+      "scratch_drop": 0.5497,
+      "art_drop": 0.4334
+    },
+    {
+      "eps": 0.03,
+      "clean_accuracy": 0.7838,
+      "scratch_fgsm_accuracy": 0.0196,
+      "art_fgsm_accuracy": 0.1312,
+      "scratch_drop": 0.7642,
+      "art_drop": 0.6526
+    },
+    {
+      "eps": 0.05,
+      "clean_accuracy": 0.7838,
+      "scratch_fgsm_accuracy": 0.0065,
+      "art_fgsm_accuracy": 0.1113,
+      "scratch_drop": 0.7773,
+      "art_drop": 0.6725
+    },
+    {
+      "eps": 0.1,
+      "clean_accuracy": 0.7838,
+      "scratch_fgsm_accuracy": 0.009,
+      "art_fgsm_accuracy": 0.0914,
+      "scratch_drop": 0.7748,
+      "art_drop": 0.6924
+    }
+  ],
+  "best_scratch_eps": 0.05,
+  "best_art_eps": 0.1
+}
