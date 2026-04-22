@@ -1,0 +1,102 @@
+services:
+  # question1:
+  #   build:
+  #     context: ./question1
+  #     args:
+  #       UID: "${UID:-1059}"
+  #       GID: "${GID:-1059}"
+  #   image: dl-dev-q1:latest
+  #   runtime: nvidia
+  #   container_name: vishal_q1_dev
+  #   restart: unless-stopped
+  #   env_file:
+  #     - .env.dev
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=0,1
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   volumes:
+  #     - ./question1:/workspace
+  #     - hf_cache:/workspace/.cache/huggingface
+  #     - ~/.ssh:/root/.ssh:ro
+  #   ports:
+  #     - "8888:8888"
+  #   shm_size: "32gb"
+  #   stdin_open: true
+  #   tty: true
+
+  # question1_onnx:
+  #   build:
+  #     context: ./question1
+  #     dockerfile: Dockerfile.onnx
+  #     args:
+  #       UID: "${UID:-1059}"
+  #       GID: "${GID:-1059}"
+  #   image: dl-dev-q1-onnx:latest
+  #   runtime: nvidia
+  #   container_name: vishal_q1_onnx_dev
+  #   restart: unless-stopped
+  #   env_file:
+  #     - .env.dev
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=0,1
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   volumes:
+  #     - ./question1:/workspace
+  #     - hf_cache:/workspace/.cache/huggingface
+  #     - ~/.ssh:/root/.ssh:ro
+  #   shm_size: "32gb"
+  #   stdin_open: true
+  #   tty: true
+
+  # question1:
+  #   build:
+  #     context: ./question1
+  #     args:
+  #       UID: "${UID:-1059}"
+  #       GID: "${GID:-1059}"
+  #   image: dl-dev-v100:latest
+  #   runtime: nvidia
+  #   container_name: vishal_q1_dev
+  #   restart: unless-stopped
+  #   env_file:
+  #     - .env.dev
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=0,1
+  #     - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+  #   volumes:
+  #     - ./question2:/workspace
+  #     - hf_cache:/workspace/.cache/huggingface
+  #     - ~/.ssh:/root/.ssh:ro
+  #   ports:
+  #     - "8889:8888"
+  #   shm_size: "32gb"
+  #   stdin_open: true
+  #   tty: true
+
+  question3:
+    build:
+      context: ./question3
+      args:
+        UID: "${UID:-1059}"
+        GID: "${GID:-1059}"
+    image: vishal_q3:latest
+    runtime: nvidia
+    container_name: vishal_dev
+    restart: unless-stopped
+    env_file:
+      - .env.dev
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0,1
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ./question3:/workspace
+      - hf_cache:/workspace/.cache/huggingface
+      - ~/.ssh:/root/.ssh:ro
+    ports:
+      - "8890:7860"
+    shm_size: "32gb"
+    stdin_open: true
+    tty: true
+
+volumes:
+  hf_cache:
