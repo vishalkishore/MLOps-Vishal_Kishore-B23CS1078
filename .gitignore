@@ -1,0 +1,8 @@
+.venv
+.cache
+.codex
+.env.dev
+.txt
+__pycache__
+artifacts
+.venv-cpu
