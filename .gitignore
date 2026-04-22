@@ -12,14 +12,6 @@ venv/
 CameraMask
 CameraRGB
 
-question1/artifacts/model/
-question1/artifacts/dataset/
-question1/artifacts/lora_unet/
-question1/artifacts/onnx/
-question1/artifacts/images/
-question1/artifacts/reports/
-question1/artifacts/prompt_ids.json
-
-question2/.cache/
-question2/.venv-cpu/
-question2/output.txt
+artifacts
+.cache
+.venv-cpu

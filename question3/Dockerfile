@@ -34,6 +34,4 @@ RUN mkdir -p /workspace/.cache/huggingface \
 
 USER appuser
 
-EXPOSE 7860
-
-CMD ["python", "main.py"]
+CMD ["python", "translate.py"]
