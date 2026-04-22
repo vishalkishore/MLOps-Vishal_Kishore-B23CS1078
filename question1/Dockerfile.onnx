@@ -1,0 +1,45 @@
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG ONNXRUNTIME_VERSION=1.20.1
+ARG ONNXRUNTIME_ARCHIVE=onnxruntime-linux-x64-1.20.1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    build-essential \
+    ca-certificates \
+    cmake \
+    curl \
+    g++ \
+    git \
+    make \
+    nlohmann-json3-dev \
+    pkg-config \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+COPY requirements-onnx.txt /tmp/requirements-onnx.txt
+
+RUN python3 -m pip install --upgrade pip setuptools wheel \
+    && python3 -m pip install --no-cache-dir -r /tmp/requirements-onnx.txt
+
+RUN mkdir -p /opt \
+    && wget -q "https://github.com/microsoft/onnxruntime/releases/download/v${ONNXRUNTIME_VERSION}/${ONNXRUNTIME_ARCHIVE}.tgz" -O /tmp/onnxruntime.tgz \
+    && tar -xzf /tmp/onnxruntime.tgz -C /opt \
+    && rm /tmp/onnxruntime.tgz
+
+COPY . /workspace
+
+ENV PYTHONUNBUFFERED=1 \
+    HF_HOME=/workspace/.cache/huggingface \
+    ONNXRUNTIME_ROOT=/opt/onnxruntime-linux-x64-1.20.1 \
+    LD_LIBRARY_PATH=/opt/${ONNXRUNTIME_ARCHIVE}/lib:${LD_LIBRARY_PATH}
+
+RUN chmod +x /workspace/scripts/run_question1_onnx.sh /workspace/scripts/verify_onnx_env.sh \
+    && ln -s /workspace/scripts/run_question1_onnx.sh /usr/local/bin/question1-onnx \
+    && ln -s /workspace/scripts/verify_onnx_env.sh /usr/local/bin/verify_onnx_env.sh \
+    && /usr/local/bin/verify_onnx_env.sh
+
+CMD ["bash"]

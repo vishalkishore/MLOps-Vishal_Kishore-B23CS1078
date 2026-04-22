@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /workspace
 
-COPY pyproject.toml .
+COPY pyproject.toml README.md ./
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --system -e ".[dev]"
@@ -21,5 +21,4 @@ ENV PYTHONUNBUFFERED=1 \
     HF_HOME=/workspace/.cache/huggingface \
     CUDA_VISIBLE_DEVICES=0,1
 
-
-CMD ["bash"]
+CMD ["python", "translate.py"]

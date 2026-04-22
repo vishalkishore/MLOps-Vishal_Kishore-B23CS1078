@@ -1,0 +1,9 @@
+{
+  "test_miou": 0.41196736693382263,
+  "test_mdice": 0.4493834376335144,
+  "train_count": 848,
+  "test_count": 212,
+  "epochs": 15,
+  "seed": 42,
+  "image_size": 256
+}

@@ -13,15 +13,11 @@ from torch.utils.data import DataLoader, Dataset
 from transformers import CLIPTextModel, CLIPTokenizer
 from diffusers import AutoencoderKL
 
+from common import ARTIFACTS_DIR, DATASET_DIR, LORA_DIR, MODEL_DIR, write_key_value_report
+
 
 MODEL_ID = "stable-diffusion-v1-5/stable-diffusion-v1-5"
 DATASET_ID = "lambda/naruto-blip-captions"
-
-BASE_DIR = Path(__file__).resolve().parent
-ARTIFACTS_DIR = BASE_DIR / "artifacts"
-MODEL_DIR = ARTIFACTS_DIR / "model"
-DATASET_DIR = ARTIFACTS_DIR / "dataset"
-LORA_DIR = ARTIFACTS_DIR / "lora_unet"
 METRICS_PATH = ARTIFACTS_DIR / "metrics.txt"
 
 IMAGE_SIZE = 512
@@ -73,17 +69,6 @@ def count_parameters(model):
     return total_params, trainable_params
 
 
-def print_parameter_counts(model, label):
-    total_params, trainable_params = count_parameters(model)
-    percent = 100 * trainable_params / total_params
-    print(
-        f"{label}: total params = {total_params}, "
-        f"trainable LoRA params = {trainable_params}, "
-        f"trainable percent = {percent:.4f}%"
-
-    )
-
-
 def get_dir_size_mb(path):
     total_size = 0
     for file_path in path.rglob("*"):
@@ -92,27 +77,38 @@ def get_dir_size_mb(path):
     return total_size / (1024 * 1024)
 
 
-def write_metrics(base_total_params, lora_trainable_params, combined_total_params, final_loss, adapter_size_mb):
-    ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
-    with METRICS_PATH.open("w", encoding="utf-8") as metrics_file:
-        metrics_file.write(f"base_total_params={base_total_params}\n")
-        metrics_file.write(f"lora_trainable_params={lora_trainable_params}\n")
-        metrics_file.write(f"combined_total_params={combined_total_params}\n")
-        metrics_file.write(f"final_training_loss={final_loss:.6f}\n")
-        metrics_file.write(f"adapter_size_mb={adapter_size_mb:.6f}\n")
+def write_metrics(
+    base_total_params,
+    lora_trainable_params,
+    combined_total_params,
+    final_loss,
+    adapter_size_mb,
+):
+    write_key_value_report(
+        METRICS_PATH,
+        {
+            "base_total_params": base_total_params,
+            "lora_trainable_params": lora_trainable_params,
+            "combined_total_params": combined_total_params,
+            "final_training_loss": f"{final_loss:.6f}",
+            "adapter_size_mb": f"{adapter_size_mb:.6f}",
+        },
+    )
 
 
 def download_model():
+    if MODEL_DIR.exists() and any(MODEL_DIR.iterdir()):
+        return MODEL_DIR
+
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    snapshot_download(
-        repo_id=MODEL_ID,
-        local_dir=str(MODEL_DIR),
-        local_dir_use_symlinks=False,
-    )
+    snapshot_download(repo_id=MODEL_ID, local_dir=str(MODEL_DIR), local_dir_use_symlinks=False)
     return MODEL_DIR
 
 
 def download_dataset():
+    if DATASET_DIR.exists() and any(DATASET_DIR.iterdir()):
+        return DATASET_DIR
+
     DATASET_DIR.mkdir(parents=True, exist_ok=True)
     dataset = load_dataset(DATASET_ID)
     dataset.save_to_disk(str(DATASET_DIR))
@@ -127,10 +123,7 @@ def load_dataset_local():
 
 
 def load_unet_with_lora(model_path):
-    unet = UNet2DConditionModel.from_pretrained(
-        model_path,
-        subfolder="unet",
-    )
+    unet = UNet2DConditionModel.from_pretrained(model_path, subfolder="unet")
     unet_total_params, _ = count_parameters(unet)
     print(f"unet base total params = {unet_total_params}")
 
@@ -196,10 +189,7 @@ def train():
         shuffle=True,
     )
 
-    optimizer = AdamW(
-        (parameter for parameter in unet.parameters() if parameter.requires_grad),
-        lr=LEARNING_RATE,
-    )
+    optimizer = AdamW((parameter for parameter in unet.parameters() if parameter.requires_grad), lr=LEARNING_RATE)
 
     step = 0
     final_loss = None
@@ -244,13 +234,7 @@ def train():
                 adapter_size_mb = get_dir_size_mb(LORA_DIR)
                 print(f"final training loss = {final_loss:.6f}")
                 print(f"lora adapter size = {adapter_size_mb:.6f} MB")
-                write_metrics(
-                    base_model_total_params,
-                    lora_trainable_params,
-                    combined_model_total_params,
-                    final_loss,
-                    adapter_size_mb,
-                )
+                write_metrics(base_model_total_params, lora_trainable_params, combined_model_total_params, final_loss, adapter_size_mb)
                 print(f"lora adapter saved to: {LORA_DIR}")
                 return
 
@@ -259,13 +243,7 @@ def train():
     adapter_size_mb = get_dir_size_mb(LORA_DIR)
     print(f"final training loss = {final_loss:.6f}")
     print(f"lora adapter size = {adapter_size_mb:.6f} MB")
-    write_metrics(
-        base_model_total_params,
-        lora_trainable_params,
-        combined_model_total_params,
-        final_loss,
-        adapter_size_mb,
-    )
+    write_metrics(base_model_total_params, lora_trainable_params, combined_model_total_params, final_loss, adapter_size_mb)
     print(f"lora adapter saved to: {LORA_DIR}")
 
 

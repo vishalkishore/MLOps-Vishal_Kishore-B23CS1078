@@ -3,7 +3,7 @@ FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl vim build-essential \
+    git curl vim build-essential cmake nlohmann-json3-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
@@ -11,7 +11,8 @@ WORKDIR /workspace
 COPY pyproject.toml .
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv pip install --system -e ".[dev]"
+    sed -i 's/"torch>=2.11.0"/"torch==2.6.0"/' pyproject.toml \
+    && uv pip install --system -e ".[dev]"
 
 COPY . .
 

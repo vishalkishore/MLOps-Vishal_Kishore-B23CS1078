@@ -1,18 +1,17 @@
 [project]
-name = "workspace"
+name = "question3-segmentation"
 version = "0.1.0"
-description = "Add your description here"
+description = "UNet-based semantic segmentation training and Gradio app for Question2."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "datasets>=4.8.4",
-    "matplotlib>=3.10.8",
-    "optuna>=4.8.0",
-    "pandas>=3.0.2",
-    "peft>=0.19.1",
-    "python-dotenv>=1.2.2",
-    "seaborn>=0.13.2",
-    "torch>=2.11.0",
-    "transformers>=5.5.4",
-    "wandb>=0.26.0",
+    "gradio>=5.0.0",
+    "matplotlib>=3.9.2",
+    "numpy>=2.1.1",
+    "pillow>=10.4.0",
+    "torch==2.6.0",
+    "torchvision>=0.21.0",
 ]
+
+[project.optional-dependencies]
+dev = []
